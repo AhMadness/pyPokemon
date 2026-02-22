@@ -329,7 +329,19 @@ def build_defensive_table_rankings() -> list[
 
         rankings.append((combo, immune, resisted, neutral, super_effective, defense_map))
 
-    rankings.sort(key=lambda row: (-len(row[2]), -len(row[1]), len(row[4]), row[0]))
+    # Defensive ranking priority:
+    # 1) highest (resisted + immune) total first
+    # 2) if tied, higher immunity count first
+    # 3) then fewer incoming super-effective types
+    # 4) stable lexical fallback on combo
+    rankings.sort(
+        key=lambda row: (
+            -(len(row[2]) + len(row[1])),
+            -len(row[1]),
+            len(row[4]),
+            row[0],
+        )
+    )
     return rankings
 
 
@@ -1339,8 +1351,8 @@ class PokemonTypeApp(tk.Tk):
         tk.Label(
             header,
             text=(
-                "Top 70 single/dual type combos sorted by incoming types that are "
-                "not very effective against them."
+                "Top 70 single/dual type combos sorted by (resisted + immune) first, "
+                "then by higher immunity count."
             ),
             bg=header["bg"],
             fg="#5B4E3A",
