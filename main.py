@@ -21,6 +21,7 @@ TYPES = [
     "Dragon",
     "Dark",
     "Steel",
+    "Fairy",
 ]
 
 TYPE_COLORS = {
@@ -41,89 +42,92 @@ TYPE_COLORS = {
     "Dragon": "#7038F8",
     "Dark": "#705848",
     "Steel": "#B8B8D0",
+    "Fairy": "#EE99AC",
 }
 
 CHIP_WIDTH = 12
 CHIP_FONT = ("Segoe UI Semibold", 9)
 COMBO_INITIAL_ROWS = 30
 COMBO_LOAD_STEP = 10
-COMBO_MAX_ROWS = 57
+COMBO_MIN_SUPER_EFFECTIVE = 6
 THREE_INITIAL_ROWS = 30
 THREE_LOAD_STEP = 10
-THREE_MAX_ROWS = 58
+THREE_MIN_COVERAGE = 10
 FOUR_INITIAL_ROWS = 30
 FOUR_LOAD_STEP = 10
-FOUR_MAX_ROWS = 142
+FOUR_MIN_COVERAGE = 12
 DEF_INITIAL_ROWS = 30
 DEF_LOAD_STEP = 10
 DEF_MAX_ROWS = 70
 
-# Official type effectiveness for generations before Fairy existed.
+# Official modern 18-type effectiveness chart (Fairy included).
 # Only non-neutral matchups are listed; all omitted pairs are neutral (1x).
 TYPE_CHART = {
     "Normal": {"Rock": 0.5, "Ghost": 0.0, "Steel": 0.5},
     "Fire": {
+        "Bug": 2.0,
+        "Steel": 2.0,
         "Fire": 0.5,
         "Water": 0.5,
         "Grass": 2.0,
         "Ice": 2.0,
-        "Bug": 2.0,
         "Rock": 0.5,
         "Dragon": 0.5,
-        "Steel": 2.0,
     },
     "Water": {
+        "Ground": 2.0,
+        "Rock": 2.0,
         "Fire": 2.0,
         "Water": 0.5,
         "Grass": 0.5,
-        "Ground": 2.0,
-        "Rock": 2.0,
         "Dragon": 0.5,
     },
     "Electric": {
-        "Water": 2.0,
-        "Electric": 0.5,
-        "Grass": 0.5,
-        "Ground": 0.0,
         "Flying": 2.0,
+        "Water": 2.0,
+        "Grass": 0.5,
+        "Electric": 0.5,
         "Dragon": 0.5,
+        "Ground": 0.0,
     },
     "Grass": {
-        "Fire": 0.5,
-        "Water": 2.0,
-        "Grass": 0.5,
-        "Poison": 0.5,
         "Ground": 2.0,
-        "Flying": 0.5,
-        "Bug": 0.5,
         "Rock": 2.0,
-        "Dragon": 0.5,
+        "Water": 2.0,
+        "Flying": 0.5,
+        "Poison": 0.5,
+        "Bug": 0.5,
         "Steel": 0.5,
+        "Fire": 0.5,
+        "Grass": 0.5,
+        "Dragon": 0.5,
     },
     "Ice": {
+        "Flying": 2.0,
+        "Ground": 2.0,
+        "Grass": 2.0,
+        "Dragon": 2.0,
+        "Steel": 0.5,
         "Fire": 0.5,
         "Water": 0.5,
-        "Grass": 2.0,
-        "Ground": 2.0,
-        "Flying": 2.0,
-        "Dragon": 2.0,
         "Ice": 0.5,
-        "Steel": 0.5,
     },
     "Fighting": {
         "Normal": 2.0,
-        "Ice": 2.0,
-        "Poison": 0.5,
-        "Flying": 0.5,
-        "Psychic": 0.5,
-        "Bug": 0.5,
         "Rock": 2.0,
-        "Ghost": 0.0,
-        "Dark": 2.0,
         "Steel": 2.0,
+        "Ice": 2.0,
+        "Dark": 2.0,
+        "Flying": 0.5,
+        "Poison": 0.5,
+        "Bug": 0.5,
+        "Psychic": 0.5,
+        "Fairy": 0.5,
+        "Ghost": 0.0,
     },
     "Poison": {
         "Grass": 2.0,
+        "Fairy": 2.0,
         "Poison": 0.5,
         "Ground": 0.5,
         "Rock": 0.5,
@@ -131,60 +135,70 @@ TYPE_CHART = {
         "Steel": 0.0,
     },
     "Ground": {
-        "Fire": 2.0,
-        "Electric": 2.0,
-        "Grass": 0.5,
         "Poison": 2.0,
-        "Flying": 0.0,
-        "Bug": 0.5,
         "Rock": 2.0,
         "Steel": 2.0,
+        "Fire": 2.0,
+        "Electric": 2.0,
+        "Bug": 0.5,
+        "Grass": 0.5,
+        "Flying": 0.0,
     },
     "Flying": {
-        "Electric": 0.5,
-        "Grass": 2.0,
         "Fighting": 2.0,
         "Bug": 2.0,
+        "Grass": 2.0,
         "Rock": 0.5,
         "Steel": 0.5,
+        "Electric": 0.5,
     },
     "Psychic": {
         "Fighting": 2.0,
         "Poison": 2.0,
+        "Steel": 0.5,
         "Psychic": 0.5,
         "Dark": 0.0,
-        "Steel": 0.5,
     },
     "Bug": {
-        "Fire": 0.5,
         "Grass": 2.0,
-        "Fighting": 0.5,
-        "Poison": 0.5,
-        "Flying": 0.5,
         "Psychic": 2.0,
-        "Ghost": 0.5,
         "Dark": 2.0,
+        "Fighting": 0.5,
+        "Flying": 0.5,
+        "Poison": 0.5,
+        "Ghost": 0.5,
         "Steel": 0.5,
+        "Fire": 0.5,
+        "Fairy": 0.5,
     },
     "Rock": {
+        "Flying": 2.0,
+        "Bug": 2.0,
         "Fire": 2.0,
         "Ice": 2.0,
         "Fighting": 0.5,
         "Ground": 0.5,
-        "Flying": 2.0,
-        "Bug": 2.0,
         "Steel": 0.5,
     },
-    "Ghost": {"Normal": 0.0, "Psychic": 2.0, "Ghost": 2.0, "Dark": 0.5, "Steel": 0.5},
-    "Dragon": {"Dragon": 2.0, "Steel": 0.5},
-    "Dark": {"Fighting": 0.5, "Psychic": 2.0, "Ghost": 2.0, "Dark": 0.5, "Steel": 0.5},
+    "Ghost": {"Normal": 0.0, "Psychic": 2.0, "Ghost": 2.0, "Dark": 0.5},
+    "Dragon": {"Dragon": 2.0, "Steel": 0.5, "Fairy": 0.0},
+    "Dark": {"Fighting": 0.5, "Psychic": 2.0, "Ghost": 2.0, "Dark": 0.5, "Fairy": 0.5},
     "Steel": {
+        "Rock": 2.0,
+        "Ice": 2.0,
+        "Fairy": 2.0,
+        "Steel": 0.5,
         "Fire": 0.5,
         "Water": 0.5,
         "Electric": 0.5,
-        "Ice": 2.0,
-        "Rock": 2.0,
+    },
+    "Fairy": {
+        "Fighting": 2.0,
+        "Dragon": 2.0,
+        "Dark": 2.0,
+        "Poison": 0.5,
         "Steel": 0.5,
+        "Fire": 0.5,
     },
 }
 
@@ -461,17 +475,23 @@ class MatchupCard(tk.Frame):
 class PokemonTypeApp(tk.Tk):
     def __init__(self) -> None:
         super().__init__()
-        self.title("Pokemon Type Matchup Studio (Pre-Fairy)")
+        self.title("Pokemon Type Matchup Studio")
         self.geometry("1200x760")
         self.minsize(960, 660)
 
         self.primary_type = tk.StringVar(value="Fire")
         self.secondary_type = tk.StringVar(value="None")
         self.bubbles: list[dict[str, float | int]] = []
-        self.combo_rankings = build_combo_rankings()[:COMBO_MAX_ROWS]
+        self.combo_rankings = [
+            row for row in build_combo_rankings() if row[1] >= COMBO_MIN_SUPER_EFFECTIVE
+        ]
         self.defensive_table_rankings = build_defensive_table_rankings()[:DEF_MAX_ROWS]
-        self.three_type_rankings = build_three_type_rankings()[:THREE_MAX_ROWS]
-        self.four_type_rankings = build_four_type_rankings()[:FOUR_MAX_ROWS]
+        self.three_type_rankings = [
+            row for row in build_three_type_rankings() if row[1] >= THREE_MIN_COVERAGE
+        ]
+        self.four_type_rankings = [
+            row for row in build_four_type_rankings() if row[1] >= FOUR_MIN_COVERAGE
+        ]
         self.combo_visible_rows = self.combo_rankings
         self.defensive_visible_rows = self.defensive_table_rankings
         self.three_visible_rows = self.three_type_rankings
@@ -1042,7 +1062,7 @@ class PokemonTypeApp(tk.Tk):
             return
 
         self.ranking_window = tk.Toplevel(self)
-        self.ranking_window.title("Type Combo Rankings (Pre-Fairy)")
+        self.ranking_window.title("Type Combo Rankings")
         self.ranking_window.geometry("1220x680")
         self.ranking_window.minsize(980, 540)
         self.ranking_window.configure(bg="#FFF7E8")
@@ -1070,7 +1090,8 @@ class PokemonTypeApp(tk.Tk):
             text=(
                 "Sorted by highest offensive super-effective coverage first. "
                 "Combo label shows counts as Strong (offense) and Weak (defense). "
-                "Showing top 57 entries (down to SE=6)."
+                f"Showing top {len(self.combo_rankings)} entries "
+                f"(down to SE>={COMBO_MIN_SUPER_EFFECTIVE})."
             ),
             bg=header["bg"],
             fg="#5B4E3A",
@@ -1325,7 +1346,7 @@ class PokemonTypeApp(tk.Tk):
             return
 
         self.defensive_table_window = tk.Toplevel(self)
-        self.defensive_table_window.title("Defensive Rankings (Pre-Fairy)")
+        self.defensive_table_window.title("Defensive Rankings")
         self.defensive_table_window.geometry("1340x760")
         self.defensive_table_window.minsize(1080, 560)
         self.defensive_table_window.configure(bg="#FFF7E8")
@@ -1351,7 +1372,7 @@ class PokemonTypeApp(tk.Tk):
         tk.Label(
             header,
             text=(
-                "Top 70 single/dual type combos sorted by (resisted + immune) first, "
+                f"Top {DEF_MAX_ROWS} single/dual type combos sorted by (resisted + immune) first, "
                 "then by higher immunity count."
             ),
             bg=header["bg"],
@@ -1614,7 +1635,7 @@ class PokemonTypeApp(tk.Tk):
             return
 
         self.three_type_window = tk.Toplevel(self)
-        self.three_type_window.title("Best 3-Type Coverage (Pre-Fairy)")
+        self.three_type_window.title("Best 3-Type Coverage")
         self.three_type_window.geometry("1200x700")
         self.three_type_window.minsize(960, 540)
         self.three_type_window.configure(bg="#FFF7E8")
@@ -1642,8 +1663,9 @@ class PokemonTypeApp(tk.Tk):
         tk.Label(
             header,
             text=(
-                f"Top 58 3-type combinations ranked by super-effective coverage. "
-                f"Includes entries down to 10/17. Top coverage = {best_count}/17."
+                f"Top {len(self.three_type_rankings)} 3-type combinations ranked by super-effective coverage. "
+                f"Includes entries down to {THREE_MIN_COVERAGE}/{len(TYPES)}. "
+                f"Top coverage = {best_count}/{len(TYPES)}."
             ),
             bg=header["bg"],
             fg="#5B4E3A",
@@ -1798,7 +1820,7 @@ class PokemonTypeApp(tk.Tk):
         types_cell.grid(row=0, column=0, sticky="nw", padx=(2, 10))
         tk.Label(
             types_cell,
-            text=f"{rank:04}. Covers {coverage_count}/17",
+            text=f"{rank:04}. Covers {coverage_count}/{len(TYPES)}",
             bg=row_bg,
             fg="#3A2E1B",
             justify="left",
@@ -1856,7 +1878,7 @@ class PokemonTypeApp(tk.Tk):
             return
 
         self.four_type_window = tk.Toplevel(self)
-        self.four_type_window.title("Best 4-Type Coverage (Pre-Fairy)")
+        self.four_type_window.title("Best 4-Type Coverage")
         self.four_type_window.geometry("1200x700")
         self.four_type_window.minsize(960, 540)
         self.four_type_window.configure(bg="#FFF7E8")
@@ -1884,8 +1906,9 @@ class PokemonTypeApp(tk.Tk):
         tk.Label(
             header,
             text=(
-                f"Top 142 4-type combinations ranked by super-effective coverage. "
-                f"Includes entries down to 12/17. Top coverage = {best_count}/17."
+                f"Top {len(self.four_type_rankings)} 4-type combinations ranked by super-effective coverage. "
+                f"Includes entries down to {FOUR_MIN_COVERAGE}/{len(TYPES)}. "
+                f"Top coverage = {best_count}/{len(TYPES)}."
             ),
             bg=header["bg"],
             fg="#5B4E3A",
@@ -2040,7 +2063,7 @@ class PokemonTypeApp(tk.Tk):
         types_cell.grid(row=0, column=0, sticky="nw", padx=(2, 10))
         tk.Label(
             types_cell,
-            text=f"{rank:04}. Covers {coverage_count}/17",
+            text=f"{rank:04}. Covers {coverage_count}/{len(TYPES)}",
             bg=row_bg,
             fg="#3A2E1B",
             justify="left",
@@ -2509,7 +2532,24 @@ class PokemonTypeApp(tk.Tk):
 
         self.canvas.tag_lower("bubble", self.panel_window)
 
+    def _is_window_open(self, window: tk.Toplevel | None) -> bool:
+        return window is not None and window.winfo_exists()
+
+    def _has_open_table_window(self) -> bool:
+        return any(
+            (
+                self._is_window_open(self.ranking_window),
+                self._is_window_open(self.defensive_table_window),
+                self._is_window_open(self.three_type_window),
+                self._is_window_open(self.four_type_window),
+            )
+        )
+
     def _animate_bubbles(self) -> None:
+        if self._has_open_table_window():
+            self.after(120, self._animate_bubbles)
+            return
+
         width = max(self.canvas.winfo_width(), 1)
         height = max(self.canvas.winfo_height(), 1)
 

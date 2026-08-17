@@ -1,7 +1,11 @@
 .venv/
+venv/
 __pycache__/
 *.py[cod]
 .idea/
 backup/
+build/
+dist/
+*.exe
 .DS_Store
 Thumbs.db
